@@ -1,0 +1,254 @@
+%================================
+% preamble.tex — 词汇讲义公用导言区
+% 基于 note-setup-borderless.tex (fenglielie@qq.com 2025-09-12) 改名并扩充
+%================================
+
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{extarrows}
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{float}
+\usepackage{indentfirst}
+\usepackage{anyfontsize}
+\usepackage{booktabs,multirow,multicol}
+\usepackage[shortlabels,inline]{enumitem}
+\usepackage{appendix}
+\usepackage[UTF8]{ctex}
+\usepackage{fontspec}
+\usepackage{booktabs}
+
+\geometry{a4paper,left=1.5cm,right=1.5cm,top=1.5cm,bottom=1.5cm}
+\setmainfont{Times New Roman} % 设置正文主字体
+\setsansfont{Arial} % 设置无衬线字体
+\setmonofont{Courier New} % 设置等宽字体
+\setCJKmainfont{SimSun}[AutoFakeBold=2.0] % 设置中文主字体（宋体）
+\setCJKsansfont{SimHei} % 设置中文无衬线字体（黑体）
+\setCJKmonofont{FangSong} % 设置中文等宽字体（仿宋）
+\pagestyle{plain}
+\setcounter{tocdepth}{1}
+
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage{graphicx}
+\graphicspath{
+    {./figure/}{./figures/}{./image/}{./images/}{./graphic/}{./graphics/}{./picture/}{./pictures/}
+}
+\usepackage{subcaption}
+
+\usepackage[ruled,linesnumbered,noline]{algorithm2e}
+\usepackage{listings}
+\lstdefinestyle{simpleStyle}{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    keywordstyle=\color{blue},
+    identifierstyle=\color{black},
+    stringstyle=\color{violet},
+    commentstyle=\color[RGB]{34,139,34},
+    showstringspaces=false,
+    numbers=left,
+    numbersep=2em,
+    numberstyle=\footnotesize,
+    frame=single,
+    framesep=1em,
+}
+\lstset{style=simpleStyle}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,linkcolor=,urlcolor=cyan
+}
+
+\renewcommand*{\proofname}{\normalfont\bfseries Proof}
+
+\usepackage{thmtools}
+
+%% define environments
+
+\declaretheorem[style=plain, name=Theorem, numbered=yes, numberwithin=section]{theorem}
+\declaretheorem[style=plain, name=Theorem, numbered=no]{theorem*}
+
+\declaretheorem[style=plain, name=Proposition, numbered=yes, sibling=theorem]{proposition}
+\declaretheorem[style=plain, name=Proposition, numbered=no]{proposition*}
+
+\declaretheorem[style=plain, name=Law, numbered=yes, sibling=theorem]{law}
+\declaretheorem[style=plain, name=Law, numbered=no]{law*}
+
+\declaretheorem[style=plain, name=Formula, numbered=yes, sibling=theorem]{formula}
+\declaretheorem[style=plain, name=Formula, numbered=no]{formula*}
+
+% \declaretheorem[style=plain, name=Corollary, numbered=yes, sibling=theorem]{corollary}
+% \declaretheorem[style=plain, name=Corollary, numbered=no]{corollary*}
+
+\declaretheorem[style=plain, name=Lemma, numbered=yes, sibling=theorem]{lemma}
+\declaretheorem[style=plain, name=Lemma, numbered=no]{lemma*}
+
+\declaretheorem[style=plain, name=Claim, numbered=yes, sibling=theorem]{claim}
+\declaretheorem[style=plain, name=Claim, numbered=no]{claim*}
+
+\declaretheorem[style=definition, name=Definition, numbered=yes, numberwithin=section]{definition}
+\declaretheorem[style=definition, name=Definition, numbered=no]{definition*}
+
+\declaretheorem[style=definition, name=Example, numbered=yes, numberwithin=section]{example}
+\declaretheorem[style=definition, name=Example, numbered=no]{example*}
+
+\declaretheorem[style=definition, name=Problem, numbered=yes, numberwithin=section]{problem}
+\declaretheorem[style=remark, name=Remark, numbered=yes, numberwithin=section]{remark}
+\declaretheorem[style=remark, name=Remark, numbered=no]{remark*}
+
+\declaretheoremstyle[headfont=\color{orange!80}\bfseries, bodyfont=\normalfont, spaceabove=3pt, spacebelow=3pt]{notestyle}
+
+\declaretheorem[style=notestyle, name=Note, numbered=yes, numberwithin=section]{note}
+\declaretheorem[style=notestyle, name=Note, numbered=no]{note*}
+
+\declaretheoremstyle[headfont=\bfseries, bodyfont=\normalfont, spaceabove=3pt, spacebelow=3pt, qed=\ensuremath{\square}]{solutionstyle}
+
+\declaretheorem[style=solutionstyle, name=Solution, numbered=yes, numberwithin=section]{solution}
+\declaretheorem[style=solutionstyle, name=Solution, numbered=no]{solution*}
+
+% thmtools numberwithin=section does not always propagate the section prefix to
+% hyperref destinations. Include the section anchor explicitly to avoid duplicate
+% PDF destination names such as example.1 in different sections.
+\makeatletter
+\@ifpackageloaded{hyperref}{%
+    \newcommand{\fixTheoremHref}[1]{%
+        \@namedef{theH#1}{\theHsection.\arabic{#1}}%
+    }%
+    \fixTheoremHref{theorem}%
+    \fixTheoremHref{definition}%
+    \fixTheoremHref{example}%
+    \fixTheoremHref{problem}%
+    \fixTheoremHref{remark}%
+    \fixTheoremHref{note}%
+    \fixTheoremHref{solution}%
+    \@namedef{theHproposition}{\theHtheorem}%
+    \@namedef{theHcorollary}{\theHtheorem}%
+    \@namedef{theHlemma}{\theHtheorem}%
+    \@namedef{theHclaim}{\theHtheorem}%
+}{}
+\makeatother
+
+\usepackage[most]{tcolorbox}
+
+\newcommand{\newtcbenvironment}[2]{
+    \tcolorboxenvironment{#1}{#2, enhanced, breakable, sharp corners, boxrule=0pt, colframe=white}
+    \tcolorboxenvironment{#1*}{#2, enhanced, breakable, rounded corners, boxrule=0pt, colframe=white}
+}
+
+%% define styles
+
+\newtcbenvironment{theorem}{colframe=RoyalPurple, colback=RoyalPurple!8}
+\newtcbenvironment{proposition}{colframe=RoyalPurple, colback=RoyalPurple!8}
+\newtcbenvironment{law}{colframe=RoyalPurple, colback=RoyalPurple!8}
+\newtcbenvironment{formula}{colframe=RoyalPurple, colback=RoyalPurple!8}
+\newtcbenvironment{corollary}{colframe=NavyBlue, colback=SkyBlue!8}
+\newtcbenvironment{lemma}{colframe=NavyBlue, colback=SkyBlue!8}
+\newtcbenvironment{claim}{colframe=NavyBlue, colback=SkyBlue!8}
+
+\newtcbenvironment{definition}{colframe=ForestGreen, colback=ForestGreen!5}
+\newtcbenvironment{example}{colframe=RawSienna, colback=RawSienna!5}
+\newtcbenvironment{problem}{colframe=WildStrawberry!30, colback=WildStrawberry!5}
+
+%% cbox
+\newtcolorbox{cbox}[1][]{%
+    enhanced,
+    breakable,
+    sharp corners,
+    leftrule=2pt, rightrule=0pt, toprule=0pt, bottomrule=0pt,
+    colframe=SkyBlue,
+    colback=SkyBlue!8,
+    #1
+}
+
+%% cover
+\usepackage{titling}
+\newcommand{\extrainfo}{}
+\renewcommand{\extrainfo}[1]{\renewcommand{\extrainfocontent}{#1}}
+\newcommand{\extrainfocontent}{}
+\newcommand{\makecover}[1]{%
+    \begin{titlepage}
+        \newgeometry{margin=0in}
+        \parindent=0pt
+        \includegraphics[width=\linewidth]{#1} % size = 1280*1024
+        \vfill
+        \begin{center}
+            \parbox{0.618\textwidth}{%
+                \raggedleft{\bfseries \fontsize{40}{3}\selectfont \thetitle} \\[0.6pt]
+                \rule{0.618\textwidth}{4pt} \\
+            }
+        \end{center}
+        \vfill
+        \begin{center}
+            \parbox{0.618\textwidth}{%
+                \raggedleft\Large
+                \begin{tabular}{r}
+                    \theauthor \\
+                    \thedate   \\
+                \end{tabular}%
+            }
+        \end{center}
+        \vfill
+        \begin{center}
+            \parbox[t]{0.7\textwidth}{\centering \itshape \extrainfocontent}
+        \end{center}
+        \vfill
+    \end{titlepage}
+    \restoregeometry
+    \thispagestyle{empty}
+}
+
+\renewcommand{\vec}{\math}
+
+%================================
+% 词汇讲义专用样式
+%================================
+\usepackage{pifont}
+
+% 词条标题: \vw{单词}{音标}{词性速览}
+\newcommand{\vw}[3]{%
+  \par\bigskip\noindent
+  {\color{SkyBlue}\bfseries\Large #1}\
+  {\small\itshape [{#3}]}\
+  {\small\color{gray} {#2}}%
+  \par\smallskip
+}
+% 短语词条标题: \vp{短语}
+\newcommand{\vp}[1]{%
+  \par\bigskip\noindent
+  {\color{NavyBlue}\bfseries\Large #1}%
+  \par\smallskip
+}
+% 义项: \sense{词性}{中文释义}
+\newcommand{\sense}[2]{\par\medskip\noindent{\bfseries\color{RoyalPurple}[{#1}]}\ {\bfseries {#2}}\par\smallskip}
+% 搭配/用法行: \col{搭配或句型}
+\definecolor{myBurgundy}{RGB}{128,0,32}
+\newcommand{\col}[1]{\par\noindent\hspace{1em}{\color{myBurgundy}$\blacktriangleright$\ \bfseries {#1}}\par\nopagebreak\smallskip}
+% 例句(广义,含短语级示例): \ex{英文}
+\newcommand{\ex}[1]{\par\nopagebreak\noindent\hspace{2.2em}{\itshape {#1}}\par\smallskip}
+% 语法侧栏
+\newtcolorbox{gram}[1]{enhanced, breakable, sharp corners,
+  leftrule=2.5pt, rightrule=0pt, toprule=0pt, bottomrule=0pt,
+  colframe=RawSienna, colback=RawSienna!5,
+  title={\bfseries Language Focus: {#1}}, fonttitle=\small,
+  coltitle=white, colbacktitle=orange!80!black,
+  attach boxed title to top left={yshift=-2mm, xshift=3mm},
+  boxed title style={sharp corners, boxrule=0pt},
+  top=4mm}
+% 辨析侧栏
+\newtcolorbox{discbox}[1]{enhanced, breakable, sharp corners,
+  leftrule=2.5pt, rightrule=0pt, toprule=0pt, bottomrule=0pt,
+  colframe=TealBlue, colback=TealBlue!6,
+  title={\bfseries Lexical discrimination: {#1}}, fonttitle=\small,
+  coltitle=white, colbacktitle=TealBlue,
+  attach boxed title to top left={yshift=-2mm, xshift=3mm},
+  boxed title style={sharp corners, boxrule=0pt},
+  top=4mm}
+% 词源侧栏
+\newtcolorbox{etymbox}{enhanced, breakable, sharp corners,
+  leftrule=2.5pt, rightrule=0pt, toprule=0pt, bottomrule=0pt,
+  colframe=ForestGreen, colback=ForestGreen!5,
+  title={\bfseries Word Origin}, fonttitle=\small,
+  coltitle=white, colbacktitle=OliveGreen,
+  attach boxed title to top left={yshift=-2mm, xshift=3mm},
+  boxed title style={sharp corners, boxrule=0pt},
+  top=4mm}

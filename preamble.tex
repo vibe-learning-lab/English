@@ -1,0 +1,115 @@
+\usepackage{amsthm,amssymb}
+\usepackage{mathtools}
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{float}
+\usepackage{indentfirst}
+\usepackage{anyfontsize}
+\usepackage{booktabs,multirow,multicol}
+\usepackage[shortlabels,inline]{enumitem}
+\usepackage{appendix}
+\usepackage[UTF8]{ctex}
+\usepackage{fontspec}
+\usepackage{booktabs}
+
+\geometry{a4paper,left=1.5cm,right=1.5cm,top=1.5cm,bottom=1.5cm}
+\setmainfont{Times New Roman} % 设置正文主字体
+\setsansfont{Arial} % 设置无衬线字体
+\setmonofont{Courier New} % 设置等宽字体
+\setCJKmainfont{SimSun}[AutoFakeBold=2.0] % 设置中文主字体（宋体）
+\setCJKsansfont{SimHei} % 设置中文无衬线字体（黑体）
+\setCJKmonofont{FangSong} % 设置中文等宽字体（仿宋）
+\pagestyle{plain}
+\setcounter{tocdepth}{1}
+
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage{graphicx}
+\graphicspath{
+    {./figure/}{./figures/}{./image/}{./images/}{./graphic/}{./graphics/}{./picture/}{./pictures/}
+}
+\usepackage{subcaption}
+
+\usepackage[ruled,linesnumbered,noline]{algorithm2e}
+\usepackage{listings}
+\lstdefinestyle{simpleStyle}{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    keywordstyle=\color{blue},
+    identifierstyle=\color{black},
+    stringstyle=\color{violet},
+    commentstyle=\color[RGB]{34,139,34},
+    showstringspaces=false,
+    numbers=left,
+    numbersep=2em,
+    numberstyle=\footnotesize,
+    frame=single,
+    framesep=1em,
+}
+\lstset{style=simpleStyle}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,linkcolor=,urlcolor=cyan
+}
+
+\usepackage{thmtools}
+
+%% define environments
+
+\declaretheorem[style=plain, name=Lexical Discrimination, numbered=no]{lex}
+
+\declaretheorem[style=definition, name=Word Origin, numbered=no]{origin}
+
+\declaretheorem[style=definition, name=Language Focus, numbered=no]{gram}
+
+\usepackage[most]{tcolorbox}
+
+\newcommand{\newtcbenvironment}[2]{
+    \tcolorboxenvironment{#1}{#2, enhanced, breakable, sharp corners, boxrule=0pt, colframe=white}
+    \tcolorboxenvironment{#1*}{#2, enhanced, breakable, rounded corners, boxrule=0pt, colframe=white}
+}
+
+%% define styles
+
+\newtcbenvironment{lex}{colframe=RoyalPurple, colback=RoyalPurple!8}
+\newtcbenvironment{origin}{colframe=ForestGreen, colback=ForestGreen!5}
+\newtcbenvironment{gram}{colframe=RawSienna, colback=RawSienna!5}
+
+%% cbox
+\newtcolorbox{cbox}[1][]{%
+    enhanced,
+    breakable,
+    sharp corners,
+    leftrule=2pt, rightrule=0pt, toprule=0pt, bottomrule=0pt,
+    colframe=SkyBlue,
+    colback=SkyBlue!8,
+    #1
+}
+
+\usepackage{pifont}
+
+% 词条标题: \vw{单词}{音标}{词性速览}
+\newcommand{\vw}[3]{%
+  \par\bigskip\noindent
+  {\color{SkyBlue!70!NavyBlue}\bfseries\Large #1}\
+  {\small [{#3}]}\
+  {\small\color{gray} {#2}}%
+  \par\smallskip
+}
+
+% 短语词条标题: \vp{短语}
+\newcommand{\vp}[1]{%
+  \par\bigskip\noindent
+  {\color{SkyBlue!70!NavyBlue}\bfseries\Large #1}%
+  \par\smallskip
+}
+
+% 义项: \sense{词性}{中文释义}
+\definecolor{mygreen}{RGB}{53, 94, 59}
+\newcommand{\sense}[2]{\bfseries\par\medskip\noindent{\color{mygreen}\bfseries[{#1}]}\ {\color{mygreen}\bfseries {#2}}\par\smallskip}
+
+% 搭配/用法行: \col{搭配或句型}
+\definecolor{myBurgundy}{RGB}{128,0,32}
+\newcommand{\col}[1]{\par\noindent\hspace{1em}{\color{myBurgundy}$\blacktriangleright$\ \bfseries {#1}}\par\nopagebreak\smallskip}
+
+% 例句(广义,含短语级示例): \ex{英文}
+\newcommand{\ex}[1]{\par\nopagebreak\noindent\hspace{2.2em}{{#1}}\par\smallskip}
